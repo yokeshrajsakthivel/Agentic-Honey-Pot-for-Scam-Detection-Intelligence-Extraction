@@ -1,0 +1,192 @@
+{
+  "0e83b9f2": {
+    "message_count": 2,
+    "persona": "student",
+    "start_time": 1769852198.9986622,
+    "last_active": 1769852225.217767,
+    "intelligence": {
+      "upi_ids": [],
+      "urls": [],
+      "phone_numbers": [],
+      "keywords": []
+    }
+  },
+  "5023cd82": {
+    "message_count": 1,
+    "persona": "busy_mom",
+    "start_time": 1769852295.753847,
+    "last_active": 1769852296.468985,
+    "intelligence": {
+      "upi_ids": [],
+      "urls": [],
+      "phone_numbers": [],
+      "keywords": []
+    }
+  },
+  "d9f7da46": {
+    "message_count": 3,
+    "persona": "skeptic",
+    "start_time": 1769852439.0773795,
+    "last_active": 1769852518.5277941,
+    "intelligence": {
+      "upi_ids": [],
+      "urls": [],
+      "phone_numbers": [],
+      "keywords": [
+        "Org: XYZ Corporation",
+        "Location: India",
+        "Name: John Doe",
+        "I need the money to pay for my visa fees",
+        "Account: paypal",
+        "Org: paypal",
+        "Name: john",
+        "I need the money for my medical emergency"
+      ]
+    }
+  },
+  "a80c36c5": {
+    "message_count": 1,
+    "persona": "student",
+    "start_time": 1769852735.0196133,
+    "last_active": 1769852735.4232605,
+    "intelligence": {
+      "upi_ids": [],
+      "urls": [],
+      "phone_numbers": [],
+      "keywords": []
+    }
+  },
+  "2c052649": {
+    "message_count": 1,
+    "persona": "busy_mom",
+    "start_time": 1769852934.9305315,
+    "last_active": 1769852935.7319863,
+    "intelligence": {
+      "upi_ids": [],
+      "urls": [],
+      "phone_numbers": [],
+      "keywords": []
+    }
+  },
+  "b26b689e": {
+    "message_count": 8,
+    "persona": "elderly",
+    "start_time": 1769853088.7997131,
+    "last_active": 1769853459.2807198,
+    "intelligence": {
+      "upi_ids": [],
+      "urls": [
+        "http://verify",
+        "http://verify/",
+        "link below"
+      ],
+      "phone_numbers": [],
+      "keywords": [
+        "Customer Assistant: ...",
+        "Customer: ...",
+        "Org: paypal",
+        "PayPal: ...",
+        "Account: ...",
+        "Title: Customer Assistant",
+        "Name: john",
+        "Account: paypal",
+        "Name: John",
+        "Org: PayPal",
+        "account enquiry"
+      ]
+    }
+  },
+  "5233f49a": {
+    "message_count": 1,
+    "persona": "skeptic",
+    "start_time": 1769853622.1393468,
+    "last_active": 1769853622.6696577,
+    "intelligence": {
+      "upi_ids": [],
+      "urls": [],
+      "phone_numbers": [],
+      "keywords": []
+    }
+  },
+  "fabbf589": {
+    "message_count": 7,
+    "persona": "elderly",
+    "start_time": 1769853767.6519423,
+    "last_active": 1769854031.0800827,
+    "intelligence": {
+      "upi_ids": [],
+      "urls": [
+        "http://verifythetransaction"
+      ],
+      "phone_numbers": [],
+      "keywords": [
+        "Name: John",
+        "you have to do it right today,",
+        "Transaction ID",
+        "Account: paypal",
+        "Make a $10 transaction",
+        "and you have to get verified as in person within the 44 hours after making the first transaction.",
+        "It is urgent to do so.",
+        "Account: 52789744432710",
+        "Transaction ID: 1T547GH92B",
+        "Account number",
+        "ACCOUNT: 52789744432710"
+      ]
+    }
+  },
+  "4be60b3d": {
+    "message_count": 6,
+    "persona": "busy_mom",
+    "start_time": 1769854203.8298512,
+    "last_active": 1769854374.518285,
+    "intelligence": {
+      "upi_ids": [
+        "tom@axisbank"
+      ],
+      "urls": [],
+      "phone_numbers": [],
+      "keywords": [
+        "Tom",
+        "Axis Bank",
+        "Account Numbers",
+        "IFSC",
+        "ACCOUNT: 5792454222970"
+      ]
+    }
+  },
+  "48a12976": {
+    "message_count": 11,
+    "persona": "busy_mom",
+    "start_time": 1769854954.1238964,
+    "last_active": 1769855512.7853467,
+    "intelligence": {
+      "upi_ids": [],
+      "urls": [
+        "http://verify.transaction.sbi"
+      ],
+      "phone_numbers": [
+        "957 824134141"
+      ],
+      "account_numbers": [
+        "5279872594472"
+      ],
+      "ifsc_codes": [
+        "T44SB122"
+      ],
+      "bank_names": [
+        "SBI"
+      ],
+      "crypto_wallets": [],
+      "person_names": [
+        "Tom",
+        "husband",
+        "you"
+      ],
+      "entities": [
+        "loan verification",
+        "husband",
+        "you"
+      ]
+    }
+  }
+}
