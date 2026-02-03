@@ -73,6 +73,39 @@ async def handle_message(
         confidence_score=scam_result.get("score", 0.0)
     )
 
+from typing import List
+from app.schemas.models import SessionSummary
+
+@app.get("/sessions", response_model=List[SessionSummary])
+async def list_sessions(api_key: str = Depends(verify_api_key)):
+    """List all active honeypot sessions"""
+    # This is a direct access to the internal session store.
+    # In a real DB, this would be a query.
+    # We map the raw dict to the schema.
+    sessions = []
+    
+    # We need to access the private _sessions safely
+    # Ideally, session_manager should have a list_sessions() method
+    # But for hackathon speed, we'll access the property if possible
+    # Let's add a safe method to SessionManager first? 
+    # Or just iterate since it's in-memory.
+    
+    all_data = session_manager._sessions # Accessing protected member for speed
+    for sid, data in all_data.items():
+        sessions.append(SessionSummary(
+            sessionId=sid,
+            message_count=data.get("message_count", 0),
+            persona=data.get("persona", "unknown"),
+            last_active=data.get("last_active", 0.0)
+        ))
+    return sessions
+
+@app.get("/session/{session_id}")
+async def get_session_details(session_id: str, api_key: str = Depends(verify_api_key)):
+    """Get full intelligence for a specific session"""
+    session = session_manager.get_session(session_id)
+    return session
+
 @app.get("/health")
 def health_check():
     return {"status": "ok"}

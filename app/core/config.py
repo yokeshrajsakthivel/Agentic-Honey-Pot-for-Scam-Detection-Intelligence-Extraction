@@ -16,6 +16,9 @@ class Settings(BaseSettings):
     # Scam Detection
     SCAM_SCORE_THRESHOLD: float = 0.7
     
+    # Callback / Webhook
+    CALLBACK_URL: str = "https://hackathon.guvi.in/api/updateHoneyPotFinalResult"
+
     class Config:
         env_file = ".env"
 

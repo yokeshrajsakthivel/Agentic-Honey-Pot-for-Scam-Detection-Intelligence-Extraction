@@ -36,5 +36,10 @@ class HoneypotResponse(BaseModel):
     reply: str
     scam_detected: bool
     confidence_score: float
-    # We might not send intelligence back in the immediate response, 
-    # but store it or send to callback.
+
+class SessionSummary(BaseModel):
+    sessionId: str
+    message_count: int
+    persona: str
+    last_active: float
+
