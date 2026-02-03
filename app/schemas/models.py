@@ -10,15 +10,18 @@ class Metadata(BaseModel):
     timestamp: Optional[str] = None
     # Add other fields as per hackathon spec if needed
 
+from typing import List, Optional, Dict, Any, Union
+
 class MessageDetail(BaseModel):
     sender: str # "scammer" or "user"
     text: str
-    timestamp: Optional[int] = None
+    timestamp: Optional[Union[int, float, str]] = None
 
 class IncomingMessage(BaseModel):
     sessionId: str
     message: MessageDetail
-    conversationHistory: List[MessageDetail] = []
+    # Allow None/Null for conversationHistory
+    conversationHistory: Optional[List[MessageDetail]] = None
     metadata: Optional[Dict[str, Any]] = None
 
 class ScamDetectionResult(BaseModel):
