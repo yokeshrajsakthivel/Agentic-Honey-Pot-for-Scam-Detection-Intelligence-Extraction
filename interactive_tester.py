@@ -26,7 +26,11 @@ def find_active_server():
 
 # Auto-detect or use arg
 if len(sys.argv) > 1:
-    API_URL = f"http://localhost:{sys.argv[1]}/message"
+    arg = sys.argv[1]
+    if arg.startswith("http"):
+        API_URL = f"{arg}/message" if not arg.endswith("/message") else arg
+    else:
+        API_URL = f"http://localhost:{arg}/message"
 else:
     API_URL = find_active_server()
 
@@ -60,9 +64,16 @@ def main():
             # Prepare Payload
             payload = {
                 "sessionId": session_id,
-                "message": user_input,
+                "message": {
+                    "sender": "scammer",
+                    "text": user_input,
+                    "timestamp": 1234567890
+                },
                 "conversationHistory": conversation_history,
-                "metadata": {"source": "manual_cli"}
+                "metadata": {
+                    "channel": "manual_cli",
+                    "language": "en"
+                }
             }
             
             headers = {
@@ -78,8 +89,9 @@ def main():
                 data = response.json()
                 
                 # Update History (Client-side tracking for simulation)
-                conversation_history.append({"role": "user", "content": user_input})
-                conversation_history.append({"role": "assistant", "content": data["reply"]})
+                # Matches strict schema: sender + text
+                conversation_history.append({"sender": "scammer", "text": user_input, "timestamp": 1234567890})
+                conversation_history.append({"sender": "user", "text": data["reply"], "timestamp": 1234567899})
                 
                 # Display Response
                 print(f"[Grandma]: {data['reply']}")

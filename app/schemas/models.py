@@ -10,11 +10,16 @@ class Metadata(BaseModel):
     timestamp: Optional[str] = None
     # Add other fields as per hackathon spec if needed
 
+class MessageDetail(BaseModel):
+    sender: str # "scammer" or "user"
+    text: str
+    timestamp: Optional[int] = None
+
 class IncomingMessage(BaseModel):
     sessionId: str
-    message: str
-    conversationHistory: List[Message]
-    metadata: Optional[Metadata] = None
+    message: MessageDetail
+    conversationHistory: List[MessageDetail]
+    metadata: Optional[Dict[str, Any]] = None
 
 class ScamDetectionResult(BaseModel):
     score: float

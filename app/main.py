@@ -29,7 +29,7 @@ async def handle_message(
 ):
     start_time = time.time()
     session_id = payload.sessionId
-    user_msg_content = payload.message
+    user_msg_content = payload.message.text
     
     logger.info(f"Received message for session {session_id}: {user_msg_content}")
 

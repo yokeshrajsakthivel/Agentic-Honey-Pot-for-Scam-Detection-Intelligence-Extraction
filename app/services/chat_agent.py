@@ -50,7 +50,7 @@ class ChatAgent:
             base_url=settings.LLM_BASE_URL
         )
 
-    async def generate_reply(self, history: List[Message], new_message: str, persona_key: str = "elderly") -> str:
+    async def generate_reply(self, history: List[Any], new_message: str, persona_key: str = "elderly") -> str:
         system_prompt = self.PERSONAS.get(persona_key, self.PERSONAS["elderly"])
         
         # Add dynamic instruction for realism: Polite Confusion > Suspicion
@@ -64,8 +64,10 @@ class ChatAgent:
         messages = [{"role": "system", "content": system_prompt}]
         
         # Convert history format
+        # History items are objects with sender="scammer"|"user" and text="..."
         for msg in history:
-            messages.append({"role": msg.role, "content": msg.content})
+            role = "user" if msg.sender == "scammer" else "assistant"
+            messages.append({"role": role, "content": msg.text})
             
         messages.append({"role": "user", "content": new_message})
         
