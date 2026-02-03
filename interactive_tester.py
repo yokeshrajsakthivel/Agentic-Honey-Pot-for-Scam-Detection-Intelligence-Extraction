@@ -3,8 +3,36 @@ import uuid
 import sys
 
 # Configuration
-API_URL = "http://localhost:8002/message"
+# Configuration
+PORTS_TO_CHECK = [8000, 8001, 8002, 8003, 8004, 8888]
 API_KEY = "hackathon-secret-key"
+API_URL = None
+
+def find_active_server():
+    print("Searching for active Honeypot server...", end="", flush=True)
+    for port in PORTS_TO_CHECK:
+        try:
+            # Try hitting the health endpoint (fastest check)
+            url = f"http://localhost:{port}/health"
+            requests.get(url, timeout=0.5)
+            print(f" Found on port {port}!")
+            return f"http://localhost:{port}/message"
+        except requests.exceptions.ConnectionError:
+            continue
+        except Exception:
+            continue
+    print(" No server found on common ports.")
+    return None
+
+# Auto-detect or use arg
+if len(sys.argv) > 1:
+    API_URL = f"http://localhost:{sys.argv[1]}/message"
+else:
+    API_URL = find_active_server()
+
+if not API_URL:
+    print("[Error] Could not find running server. Please specify port: python interactive_tester.py <port>")
+    sys.exit(1)
 
 def main():
     print("="*50)
