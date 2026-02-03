@@ -33,6 +33,23 @@ async def handle_message(
     
     logger.info(f"Received message for session {session_id}: {user_msg_content}")
 
+    # ... (rest of function)
+
+# Add root endpoint for robustness (Hackathon Tester Safe-guard)
+@app.post("/", response_model=HoneypotResponse)
+async def root_handle_message(
+    payload: IncomingMessage, 
+    background_tasks: BackgroundTasks,
+    api_key: str = Depends(verify_api_key)
+):
+    """Mirror of /message for testers that forget the path"""
+    return await handle_message(payload, background_tasks, api_key)
+    start_time = time.time()
+    session_id = payload.sessionId
+    user_msg_content = payload.message.text
+    
+    logger.info(f"Received message for session {session_id}: {user_msg_content}")
+
     # 1. Parallel Execution of Services
     # We want to respond fast (<500ms target, though LLM might take 1-2s).
     # We must await the LLM reply for the response.
