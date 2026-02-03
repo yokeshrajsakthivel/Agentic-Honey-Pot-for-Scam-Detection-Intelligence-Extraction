@@ -24,6 +24,14 @@ class ScamDetector:
             "'score' (float 0.0-1.0), 'scamDetected' (boolean), 'reason' (string). "
             "Example: {\"score\": 0.95, \"scamDetected\": true, \"reason\": \"Asked for bank details\"}."
         )
+        # Lazy load model
+        self.model = None
+
+    def get_model(self):
+        if self.model is None:
+            logging.info("Lazy loading SentenceTransformer model...")
+            self.model = SentenceTransformer("all-MiniLM-L6-v2")
+        return self.model
 
     async def predict(self, text: str):
         try:

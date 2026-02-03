@@ -11,3 +11,6 @@ services:
         sync: false
       - key: LLM_BASE_URL
         value: https://api.groq.com/openai/v1
+      - key: PYTHON_VERSION
+        value: 3.11.0
+
