@@ -18,7 +18,7 @@ class MessageDetail(BaseModel):
 class IncomingMessage(BaseModel):
     sessionId: str
     message: MessageDetail
-    conversationHistory: List[MessageDetail]
+    conversationHistory: List[MessageDetail] = []
     metadata: Optional[Dict[str, Any]] = None
 
 class ScamDetectionResult(BaseModel):
