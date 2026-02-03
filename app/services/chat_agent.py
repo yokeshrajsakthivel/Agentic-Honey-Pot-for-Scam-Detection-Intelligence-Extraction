@@ -1,7 +1,7 @@
 from openai import AsyncOpenAI
 from app.core.config import settings
 from app.schemas.models import Message
-from typing import List
+from typing import List, Any
 import logging
 
 class ChatAgent:
