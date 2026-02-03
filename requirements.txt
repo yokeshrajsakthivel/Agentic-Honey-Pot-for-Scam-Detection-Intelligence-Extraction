@@ -3,11 +3,4 @@ uvicorn
 python-dotenv
 requests
 httpx
-
-# ML (SAFE for Render)
-torch==2.0.1
-sentence-transformers==2.2.2
-transformers==4.36.2
-
-# LLM SDK
 openai
