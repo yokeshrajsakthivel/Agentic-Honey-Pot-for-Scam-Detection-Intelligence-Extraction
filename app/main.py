@@ -88,6 +88,10 @@ async def root_handle_message(
     """Mirror of /message for testers that forget the path"""
     return await handle_message(payload, background_tasks, api_key)
 
+@app.get("/")
+def root_status():
+    return {"status": "Agentic Honeypot Active", "info": "Send POST requests to /message"}
+
 from typing import List
 from app.schemas.models import SessionSummary
 
