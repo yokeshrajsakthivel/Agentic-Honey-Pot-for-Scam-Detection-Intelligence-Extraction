@@ -66,8 +66,16 @@ class ChatAgent:
         # Convert history format
         # History items are objects with sender="scammer"|"user" and text="..."
         for msg in history:
-            role = "user" if msg.sender == "scammer" else "assistant"
-            messages.append({"role": role, "content": msg.text})
+            # Handle Permissive Types (Dict or Object)
+            if isinstance(msg, dict):
+                sender = msg.get("sender", "user")
+                text = msg.get("text", "")
+            else:
+                sender = getattr(msg, "sender", "user")
+                text = getattr(msg, "text", "")
+
+            role = "user" if sender == "scammer" else "assistant"
+            messages.append({"role": role, "content": text})
             
         messages.append({"role": "user", "content": new_message})
         

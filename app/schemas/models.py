@@ -13,16 +13,19 @@ class Metadata(BaseModel):
 from typing import List, Optional, Dict, Any, Union
 
 class MessageDetail(BaseModel):
-    sender: str # "scammer" or "user"
-    text: str
+    sender: Optional[str] = "scammer"  # Default if missing
+    text: Optional[str] = ""
     timestamp: Optional[Union[int, float, str]] = None
 
 class IncomingMessage(BaseModel):
-    sessionId: str
-    message: MessageDetail
-    # Allow None/Null for conversationHistory
-    conversationHistory: Optional[List[MessageDetail]] = None
+    sessionId: Optional[str] = "unknown_session"
+    # Accept dict, object, or even string if spec changes
+    message: Optional[Union[MessageDetail, Dict[str, Any], str]] = None
+    conversationHistory: Optional[List[Union[MessageDetail, Dict[str, Any]]]] = None
     metadata: Optional[Dict[str, Any]] = None
+
+    class Config:
+        extra = "allow" # Ignore extra fields entirely
 
 class ScamDetectionResult(BaseModel):
     score: float
