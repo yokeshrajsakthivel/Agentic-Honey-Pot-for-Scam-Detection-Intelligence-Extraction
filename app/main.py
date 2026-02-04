@@ -16,6 +16,16 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title=settings.PROJECT_NAME, openapi_url=f"{settings.API_V1_STR}/openapi.json")
 
+# Fix CORS for Hackathon Tester (since it runs in browser/external domain)
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Allow all for hackathon
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Dependency for API key
 async def verify_api_key(x_api_key: str = Header(...)):
     if x_api_key != settings.API_KEY:
