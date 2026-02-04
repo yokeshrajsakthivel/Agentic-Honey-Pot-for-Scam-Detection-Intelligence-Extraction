@@ -29,24 +29,10 @@ async def handle_message(
 ):
     start_time = time.time()
     
-    # 0. Normalize Payload (Hackathon Logic Protection)
-    # Ensure sessionId is string
-    session_id = str(payload.sessionId) if payload.sessionId else "unknown"
+    # 0. Normalize Payload
+    session_id = payload.sessionId if payload.sessionId else "unknown"
+    user_msg_content = payload.message.text if payload.message.text else "Hello"
     
-    # Ensure user_msg_content is extracted safely
-    user_msg_content = ""
-    if isinstance(payload.message, str):
-        user_msg_content = payload.message
-    elif hasattr(payload.message, "text") and payload.message.text:
-         user_msg_content = payload.message.text
-    elif isinstance(payload.message, dict):
-         user_msg_content = payload.message.get("text", "")
-    
-    # Fallback if empty
-    if not user_msg_content:
-        user_msg_content = "Hello" # Prevent empty string errors in LLM
-        logging.warning(f"Empty message content received for session {session_id}")
-
     logger.info(f"Received message for session {session_id}: {user_msg_content}")
     logger.info(f"Full Payload Raw: {payload.dict()}")
 
@@ -59,26 +45,10 @@ async def handle_message(
     session = session_manager.get_session(session_id)
     persona = session.get("persona", "elderly") # Fallback to elderly
     
-    # Handle optional history (it might be None from permissive schema)
-    history_raw = payload.conversationHistory or []
-    # Normalize history items to objects if they are dicts (Pydantic might leave them as dicts in Union)
-    history = []
-    for item in history_raw:
-        if isinstance(item, dict):
-            # Create object manually or use simple namespace/dict wrapper
-            # ChatAgent expects objects with .sender and .text attributes if it's MessageDetail
-            # But wait, ChatAgent imports Message from models? No, it uses Any now.
-            # Let's just make sure ChatAgent handles dicts too.
-            # Actually, easiest is to ensure it's a list of objects or dicts consistent for ChatAgent.
-            # Let's pass it as is and update ChatAgent to handle dict access safely?
-            # Better: Convert to MessageDetail objects here if possible or just let ChatAgent handle it.
-            # Let's convert to simple objects for safety.
-            class SimpleMsg:
-                sender = item.get("sender", "user")
-                text = item.get("text", "")
-            history.append(SimpleMsg())
-        else:
-            history.append(item)
+    # Handle optional history
+    history = payload.conversationHistory or []
+    # Ensure history contains objects (Pydantic handles this, but strictly speaking conversationHistory is List[MessageDetail])
+    # No extra normalization needed for Pydantic models.
     
     chat_task = asyncio.create_task(chat_agent.generate_reply(history, user_msg_content, persona_key=persona))
     scam_task = asyncio.create_task(scam_detector.predict(user_msg_content))
