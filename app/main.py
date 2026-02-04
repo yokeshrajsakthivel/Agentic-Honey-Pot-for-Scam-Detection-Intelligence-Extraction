@@ -31,8 +31,16 @@ async def handle_message(
     
     # 0. Normalize Payload
     session_id = payload.sessionId if payload.sessionId else "unknown"
-    user_msg_content = payload.message.text if payload.message.text else "Hello"
     
+    # Extract message safely (it is now a dict)
+    user_msg_content = ""
+    if payload.message and isinstance(payload.message, dict):
+        user_msg_content = payload.message.get("text", "")
+    
+    # Fallback
+    if not user_msg_content:
+        user_msg_content = "Hello" # Prevent empty string errors in LLM
+        
     logger.info(f"Received message for session {session_id}: {user_msg_content}")
     logger.info(f"Full Payload Raw: {payload.dict()}")
 

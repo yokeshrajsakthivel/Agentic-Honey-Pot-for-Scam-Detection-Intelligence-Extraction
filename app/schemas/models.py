@@ -19,8 +19,8 @@ class MessageDetail(BaseModel):
 
 class IncomingMessage(BaseModel):
     sessionId: Optional[str] = "unknown_session"
-    message: MessageDetail
-    conversationHistory: Optional[List[MessageDetail]] = []
+    message: Optional[Dict[str, Any]] = None
+    conversationHistory: Optional[List[Dict[str, Any]]] = []
     metadata: Optional[Dict[str, Any]] = None
 
     class Config:
