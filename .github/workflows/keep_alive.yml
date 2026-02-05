@@ -1,0 +1,15 @@
+name: Keep Render Alive
+
+on:
+  schedule:
+    - cron: '*/10 * * * *' # Run every 10 minutes
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping API
+        run: |
+          # Replace with your actual Render URL
+          curl -s https://agentic-honey-pot-for-scam-detection-4h0d.onrender.com/health || echo "Ping failed"

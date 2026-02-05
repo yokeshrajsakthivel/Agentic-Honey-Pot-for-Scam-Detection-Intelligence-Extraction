@@ -106,3 +106,26 @@ docker stop honeypot-api
 docker rm honeypot-api
 ```
 
+---
+
+## ⚡ Keeping Render Active 24/7 (Free Tier)
+Render's free tier sleeps after 15 minutes of inactivity. Use one of these methods to keep it awake.
+
+### Option A: GitHub Action (Recommended)
+This repo includes a workflow `.github/workflows/keep_alive.yml` that pings your app every 10 minutes.
+
+1. Open `.github/workflows/keep_alive.yml`.
+2. Change the URL `https://honeypot.onrender.com/health` to **your actual Render URL**.
+3. Commit and push to GitHub.
+4. Go to the **Actions** tab in your repo to verify it's running.
+
+### Option B: UptimeRobot (Alternative)
+1. Sign up for free at [UptimeRobot](https://uptimerobot.com/).
+2. Create a new Monitor:
+   - **Type**: HTTP(s)
+   - **Friendly Name**: Honeypot API
+   - **URL/IP**: `https://<your-app>.onrender.com/health`
+   - **Monitoring Interval**: 10 minutes (or 5 min).
+3. Start monitoring. This will keep your app awake.
+
+

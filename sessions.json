@@ -70,14 +70,31 @@
     }
   },
   "test-session-001": {
-    "message_count": 1,
+    "message_count": 2,
     "persona": "student",
     "start_time": 1770285408.3568115,
-    "last_active": 1770285408.8163438,
+    "last_active": 1770301614.1143885,
     "intelligence": {
       "upi_ids": [
         "scammer@bank"
       ],
+      "urls": [],
+      "phone_numbers": [],
+      "account_numbers": [],
+      "ifsc_codes": [],
+      "bank_names": [],
+      "crypto_wallets": [],
+      "person_names": [],
+      "entities": []
+    }
+  },
+  "unknown_session": {
+    "message_count": 1,
+    "persona": "student",
+    "start_time": 1770301700.6252499,
+    "last_active": 1770301700.9634368,
+    "intelligence": {
+      "upi_ids": [],
       "urls": [],
       "phone_numbers": [],
       "account_numbers": [],

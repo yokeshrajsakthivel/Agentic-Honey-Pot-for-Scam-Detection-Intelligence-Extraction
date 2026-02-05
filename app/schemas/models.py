@@ -43,6 +43,7 @@ class IntelligenceResult(BaseModel):
     entities: List[str] = [] # Fallback for other orgs/locations
     
 class HoneypotResponse(BaseModel):
+    status: str = "success"
     reply: str
     scam_detected: bool
     confidence_score: float
