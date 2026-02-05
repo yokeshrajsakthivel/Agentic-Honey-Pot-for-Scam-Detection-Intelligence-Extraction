@@ -2,7 +2,7 @@ name: Keep Render Alive
 
 on:
   schedule:
-    - cron: '*/2 * * * *' # Run every 2 minutes
+    - cron: '* * * * *' # Run every minute (GitHub's fastest supported interval)
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -12,4 +12,7 @@ jobs:
       - name: Ping API
         run: |
           # Replace with your actual Render URL
-          curl -s https://agentic-honey-pot-for-scam-detection-4h0d.onrender.com/health || echo "Ping failed"
+          # Loop to ping every 30 seconds within the 1-minute job
+          curl -s https://agentic-honey-pot-for-scam-detection-4h0d.onrender.com/health || echo "Ping 1 failed"
+          sleep 30
+          curl -s https://agentic-honey-pot-for-scam-detection-4h0d.onrender.com/health || echo "Ping 2 failed"
