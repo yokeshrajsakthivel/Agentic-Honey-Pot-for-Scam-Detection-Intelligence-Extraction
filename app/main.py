@@ -91,6 +91,7 @@ async def handle_message(
         processing_time = (time.time() - start_time) * 1000
         logger.info(f"Processed in {processing_time:.2f}ms")
         
+
         return HoneypotResponse(
             reply=reply_text,
             scam_detected=scam_result.get("scamDetected", False),
@@ -101,7 +102,6 @@ async def handle_message(
         # DEBUG MODE: Expose error to client
         return HoneypotResponse(
             reply=f"DEBUG ERROR: {str(e)}", 
->>>>>>> 5ed955e (commit 21)
             scam_detected=False,
             confidence_score=0.0
         )
