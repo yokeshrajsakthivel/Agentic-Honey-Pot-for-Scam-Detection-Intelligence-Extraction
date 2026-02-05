@@ -1,69 +1,24 @@
 {
-  "test-session-001": {
-    "message_count": 2,
-    "persona": "student",
-    "start_time": 1770285408.3568115,
-    "last_active": 1770301614.1143885,
+  "9b034b80": {
+    "message_count": 7,
+    "persona": "busy_mom",
+    "start_time": 1770307644.9121485,
+    "last_active": 1770307819.7387087,
     "intelligence": {
-      "upi_ids": [
-        "scammer@bank"
+      "upi_ids": [],
+      "urls": [],
+      "phone_numbers": [
+        "+91-9876543210"
       ],
-      "urls": [],
-      "phone_numbers": [],
-      "account_numbers": [],
+      "account_numbers": [
+        "3456",
+        "Your account number",
+        "1234567890123456"
+      ],
       "ifsc_codes": [],
-      "bank_names": [],
-      "crypto_wallets": [],
-      "person_names": [],
-      "entities": []
-    }
-  },
-  "unknown_session": {
-    "message_count": 1,
-    "persona": "student",
-    "start_time": 1770301700.6252499,
-    "last_active": 1770301700.9634368,
-    "intelligence": {
-      "upi_ids": [],
-      "urls": [],
-      "phone_numbers": [],
-      "account_numbers": [],
-      "ifsc_codes": [],
-      "bank_names": [],
-      "crypto_wallets": [],
-      "person_names": [],
-      "entities": []
-    }
-  },
-  "abcfe944": {
-    "message_count": 5,
-    "persona": "skeptic",
-    "start_time": 1770303033.4433763,
-    "last_active": 1770303515.6602464,
-    "intelligence": {
-      "upi_ids": [],
-      "urls": [],
-      "phone_numbers": [],
-      "account_numbers": [],
-      "ifsc_codes": [],
-      "bank_names": [],
-      "crypto_wallets": [],
-      "person_names": [],
-      "entities": []
-    }
-  },
-  "c8a08be6": {
-    "message_count": 2,
-    "persona": "elderly",
-    "start_time": 1770303554.652871,
-    "last_active": 1770303563.2827816,
-    "intelligence": {
-      "upi_ids": [],
-      "urls": [],
-      "phone_numbers": [],
-      "account_numbers": [],
-      "ifsc_codes": [],
-      "bank_names": [],
+      "bank_names": [
+        "SBI"
+      ],
       "crypto_wallets": [],
       "person_names": [],
       "entities": []

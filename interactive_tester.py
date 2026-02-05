@@ -58,6 +58,23 @@ def main():
     session_id = str(uuid.uuid4())[:8]
     print(f"Session ID: {session_id}")
     
+    # Trigger first empty message to initialize session and get persona
+    try:
+        init_payload = {
+            "sessionId": session_id,
+            "message": { "sender": "scammer", "text": "init_ping", "timestamp": 123 },
+            "conversationHistory": [], 
+            "metadata": {}
+        }
+        # We assume the first response will initialize the session.
+        # But a cleaner way is to just let the first user message trigger it.
+        # Let's inspect the logs or valid response after first message.
+    except:
+        pass
+    
+    print("(Persona will be assigned automatically by the server. Sending first message...)\n")
+    print("-" * 50)
+    
     conversation_history = []
     
     while True:
@@ -67,6 +84,9 @@ def main():
                 break
             if not user_input:
                 continue
+
+            # ... (prepare payload) ...
+
 
             # Prepare Payload
             payload = {
