@@ -104,5 +104,22 @@
       "person_names": [],
       "entities": []
     }
+  },
+  "abcfe944": {
+    "message_count": 2,
+    "persona": "skeptic",
+    "start_time": 1770303033.4433763,
+    "last_active": 1770303043.1330135,
+    "intelligence": {
+      "upi_ids": [],
+      "urls": [],
+      "phone_numbers": [],
+      "account_numbers": [],
+      "ifsc_codes": [],
+      "bank_names": [],
+      "crypto_wallets": [],
+      "person_names": [],
+      "entities": []
+    }
   }
 }
