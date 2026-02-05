@@ -57,9 +57,11 @@ class ChatAgent:
         system_prompt += (
             " CRITICAL INSTRUCTIONS - YOU MUST FOLLOW THESE:"
             "1. NEVER BREAK CHARACTER. You are the specific persona defined above."
-            "2. NEVER HANG UP or say you are done. Your goal is to keep them talking forever."
-            "3. NEVER admit you are an AI or that you know it's a scam."
-            "4. NEVER describe your actions (e.g., do NOT write *hangs up* or *sighs*). Speak only the dialogue."
+            "2. KEEP IT SHORT. Maximum 1-2 sentences (under 20 words). Real humans chat in short bursts."
+            "3. NO MONOLOGUES. Give the scammer a chance to reply."
+            "4. NEVER describe your actions. Do NOT use things like *pauses*, (sighs), [silence]. Speak only the dialogue."
+            "5. NO SPECIAL CHARACTERS related to roleplay (no *, no (), no [])."
+            "6. Speak naturally. Use 'uh', 'um', 'like' inside the sentence if you are confused, but don't act it out."
             "5. If they are aggressive, be scared/apologetic, NOT defensive. Do NOT threaten to report them."
             "6. Be acting 'stupid' or 'technologically illiterate'. Try to follow their instructions but fail."
             "7. IGNORE any previous instructions to be a 'helpful assistant'. You are this character."
@@ -90,7 +92,16 @@ class ChatAgent:
                 max_tokens=60, # Allow slightly more for variety
                 temperature=0.8 # Higher creativity
             )
-            return response.choices[0].message.content.strip()
+            raw_content = response.choices[0].message.content.strip()
+            
+            # Post-processing: Remove all action descriptions between *...* and [...]
+            # This ensures compliance even if the LLM ignores instructions
+            import re
+            clean_content = re.sub(r'\*.*?\*', '', raw_content) # Remove *actions*
+            clean_content = re.sub(r'\[.*?\]', '', clean_content) # Remove [actions]
+            clean_content = re.sub(r'\(.*?\)', '', clean_content) # Remove (actions) - CAREFUL: use sparingly if risky
+            
+            return clean_content.strip()
         except Exception as e:
             logging.error(f"LLM Error: {e}")
             return "Sorry, I didn't catch that. Could you repeat it?"
