@@ -4,39 +4,46 @@ import sys
 
 # Configuration
 # Configuration
-PORTS_TO_CHECK = [8000, 8001, 8002, 8003, 8004, 8888]
-API_KEY = "hackathon-secret-key"
-API_URL = None
+import argparse
+
+# Configuration
+DEFAULT_PORTS = [8000, 8001, 8002, 8003, 8004, 8888]
+DEFAULT_KEY = "hackathon-secret-key"
 
 def find_active_server():
     print("Searching for active Honeypot server...", end="", flush=True)
-    for port in PORTS_TO_CHECK:
+    for port in DEFAULT_PORTS:
         try:
-            # Try hitting the health endpoint (fastest check)
             url = f"http://localhost:{port}/health"
             requests.get(url, timeout=0.5)
             print(f" Found on port {port}!")
             return f"http://localhost:{port}/message"
-        except requests.exceptions.ConnectionError:
-            continue
         except Exception:
             continue
     print(" No server found on common ports.")
     return None
 
-# Auto-detect or use arg
-if len(sys.argv) > 1:
-    arg = sys.argv[1]
-    if arg.startswith("http"):
-        API_URL = f"{arg}/message" if not arg.endswith("/message") else arg
-    else:
-        API_URL = f"http://localhost:{arg}/message"
-else:
+# Parse Arguments
+parser = argparse.ArgumentParser(description="Agentic Honeypot Interactive Tester")
+parser.add_argument("--url", type=str, help="Full URL to the /message endpoint")
+parser.add_argument("--key", type=str, default=DEFAULT_KEY, help="API Key")
+args = parser.parse_args()
+
+API_URL = args.url
+API_KEY = args.key
+
+if not API_URL:
+    # Try auto-discovery if no URL provided
     API_URL = find_active_server()
 
 if not API_URL:
-    print("[Error] Could not find running server. Please specify port: python interactive_tester.py <port>")
+    print("[Error] Could not find running server. Please specify --url.")
     sys.exit(1)
+
+# Append /message if missing (convenience)
+if not API_URL.endswith("/message") and not API_URL.endswith("/"):
+     API_URL += "/message"
+
 
 def main():
     print("="*50)

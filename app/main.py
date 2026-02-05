@@ -64,7 +64,7 @@ async def handle_message(
         session = session_manager.get_session(session_id)
         persona = session.get("persona", "elderly") # Fallback to elderly
         
-        # Handle optional history
+        # Handle optional history (it might be None from permissive schema)
         history = payload.conversationHistory or []
         
         chat_task = asyncio.create_task(chat_agent.generate_reply(history, user_msg_content, persona_key=persona))
@@ -94,20 +94,17 @@ async def handle_message(
         processing_time = (time.time() - start_time) * 1000
         logger.info(f"Processed in {processing_time:.2f}ms")
         
-        # SAFE TYPE CASTING
-        score = float(scam_result.get("score", 0.0))
-        is_scam = bool(scam_result.get("scamDetected", False))
-        
         return HoneypotResponse(
             reply=reply_text,
-            scam_detected=is_scam,
-            confidence_score=score
+            scam_detected=scam_result.get("scamDetected", False),
+            confidence_score=scam_result.get("score", 0.0)
         )
     except Exception as e:
         logger.error(f"CRITICAL ERROR in handle_message: {e}")
-        # Return a safe fallback response so the tester doesn't fail
+        # DEBUG MODE: Expose error to client
         return HoneypotResponse(
-            reply="I am having a bit of trouble hearing you, dear. Could you say that again?",
+            reply=f"DEBUG ERROR: {str(e)}", 
+>>>>>>> 5ed955e (commit 21)
             scam_detected=False,
             confidence_score=0.0
         )
