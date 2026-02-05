@@ -68,5 +68,24 @@
         "exirt"
       ]
     }
+  },
+  "test-session-001": {
+    "message_count": 1,
+    "persona": "student",
+    "start_time": 1770285408.3568115,
+    "last_active": 1770285408.8163438,
+    "intelligence": {
+      "upi_ids": [
+        "scammer@bank"
+      ],
+      "urls": [],
+      "phone_numbers": [],
+      "account_numbers": [],
+      "ifsc_codes": [],
+      "bank_names": [],
+      "crypto_wallets": [],
+      "person_names": [],
+      "entities": []
+    }
   }
 }

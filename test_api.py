@@ -9,7 +9,7 @@ HEADERS = {
 }
 PAYLOAD = {
     "sessionId": "test-session-001",
-    "message": "Hello, I am calling from the bank. You need to transfer money to this secure UPI ID: scammer@bank immediately or your account will be blocked.",
+    "message": {"text": "Hello, I am calling from the bank. You need to transfer money to this secure UPI ID: scammer@bank immediately or your account will be blocked."},
     "conversationHistory": [],
     "metadata": {}
 }
