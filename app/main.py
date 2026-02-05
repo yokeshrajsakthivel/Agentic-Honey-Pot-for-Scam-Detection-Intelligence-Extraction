@@ -84,9 +84,7 @@ async def handle_message(
         background_tasks.add_task(
             callback_service.send_final_report, 
             session_id, 
-            session["intelligence"],
-            session["message_count"],
-            scam_result.get("scamDetected", False)
+            session["intelligence"]
         )
 
         # 4. Construct Response
