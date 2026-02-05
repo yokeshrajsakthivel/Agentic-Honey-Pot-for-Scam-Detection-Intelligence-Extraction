@@ -8,14 +8,11 @@ class CallbackService:
         from app.core.config import settings
         self.callback_url = settings.CALLBACK_URL
     
-    async def send_final_report(self, session_id: str, intelligence: Dict[str, Any], message_count: int, scam_detected: bool, status: str = "completed"):
+    async def send_final_report(self, session_id: str, intelligence: Dict[str, Any], status: str = "completed"):
         payload = {
             "sessionId": session_id,
             "status": status,
-            "scamDetected": scam_detected,
-            "totalMessagesExchanged": message_count,
-            "extractedIntelligence": intelligence,
-            "agentNotes": "Automated report from Agentic Honeypot"
+            "extracted_data": intelligence
         }
         
         async with httpx.AsyncClient() as client:
