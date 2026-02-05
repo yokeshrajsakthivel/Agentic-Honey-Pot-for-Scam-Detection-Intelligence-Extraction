@@ -68,3 +68,41 @@ curl -X POST "https://<your-public-url>/message" \
            "metadata": {}
          }'
 ```
+
+---
+
+## Option 3: Docker Deployment 🐳
+Host the application anywhere using Docker (VPS, EC2, DigitalOcean).
+
+### 1. Prerequisites
+- [Docker Installed](https://www.docker.com/products/docker-desktop/)
+
+### 2. Build the Image
+Open a terminal in the project root and run:
+```bash
+docker build -t agentic-honeypot .
+```
+
+### 3. Run the Container
+Run the container, exposing port 8000. You need to pass your environment variables.
+```bash
+docker run -d -p 8000:8000 --name honeypot-api \
+  -e API_KEY=hackathon-secret-key \
+  -e LLM_API_KEY=your_openai_key \
+  -e LLM_BASE_URL=https://api.openai.com/v1 \
+  agentic-honeypot
+```
+
+### 4. Verify
+Check if the container is running:
+```bash
+docker ps
+```
+Your API is accessible at `http://localhost:8000`.
+
+### 5. Stop/Remove
+```bash
+docker stop honeypot-api
+docker rm honeypot-api
+```
+
