@@ -28,7 +28,24 @@
     "message_count": 1,
     "persona": "student",
     "start_time": 1770310307.7993426,
-    "last_active": 1770310308.3374584,
+    "last_active": 1770310308.3384588,
+    "intelligence": {
+      "upi_ids": [],
+      "urls": [],
+      "phone_numbers": [],
+      "account_numbers": [],
+      "ifsc_codes": [],
+      "bank_names": [],
+      "crypto_wallets": [],
+      "person_names": [],
+      "entities": []
+    }
+  },
+  "compliance-test": {
+    "message_count": 1,
+    "persona": "elderly",
+    "start_time": 1770312587.7992334,
+    "last_active": 1770312588.1756253,
     "intelligence": {
       "upi_ids": [],
       "urls": [],
